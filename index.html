@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        
+        <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+        
+        <script src="js/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />
+        
+        <script type="text/javascript" src="js/Highcharts-3.0.9/js/highcharts.js"></script>
+        <script type="text/javascript" src="js/Highcharts-3.0.9/js/highcharts-more.js"></script>
+        <script type="text/javascript" src="js/Highcharts-3.0.9/js/modules/exporting.js"></script>
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.0/quentin_sr.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.0/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/fastclick.js"></script>
+        <title>Securité Routière</title>
+        
+        <style>
+            .appel {
+                width:47%;
+                height:47%;
+                margin:1%;
+            }
+            
+        </style>
+        
+        
+    </head>
+    
+    <!--
+<script src="http://debug-software.intel.com/target/target-script-min.js#3jmx2tmLaYyF1jyEDFWVRvW8D8jAsI8xy0fJTRCC1ME"></script>
+-->
+    <body onload="initFastButtons();">
+        <span id="fastclick">
+            <!-- page Menu-->
+            <div data-role="page" id="menu" class="page_man ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                </div>
+                <!-- /header -->
+                <!-- content -->
+                <div class="content" data-role="content" >
+                    <ul data-role="listview" class="no-radius" data-inset="true">
+                        <li data-role="list-divider" class="list-divider">Simulateurs</li>
+                        <li><a href="#page_taux_dalcoolemie" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/beer.png">
+                            <h2>Taux d'alcoolémie</h2>
+                            <p>Taux d'alcoolémie</p></a>
+                        </li>
+                        <li><a href="#page_distance_de_freinage" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/speedometer.png">
+                            <h2>Distance de freinage</h2>
+                            <p>Distance de freinage</p></a>
+                        </li>
+                        <li><a href="#page_temps_perdue" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/gas_station.png">
+                            <h2>Comparateur de vitesse</h2>
+                            <p>Comparateur de vitesse</p></a>
+                        </li>
+                        <li data-role="list-divider" class="list-divider">Sécurité</li>
+                        <li><a href="#page_secu_routiere" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/dnd.png">
+                            <h2>Sécurité routière</h2>
+                            <p>Sécurité routière</p></a>
+                        </li>
+                        <li><a href="#page_premier_secours" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/survival_bag.png">
+                            <h2>Premiers Secours</h2>
+                            <p>Premiers Secours</p></a>
+                        </li>
+                        <li><a href="#page_numero_urgence" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/phone2.png">
+                            <h2>Numéros urgence</h2>
+                            <p>Numéros urgence</p></a>
+                        </li>
+                        <li data-role="list-divider" class="list-divider">À Savoir</li>
+                        <li><a href="#page_links" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/link.png">
+                            <h2>Liens utiles</h2>
+                            <p>Liens utiles</p></a>
+                        </li>
+                        <li><a href="#page_about" data-transition="slide">
+                            <img class="icon-menu" src="img/icons/about.png">
+                            <h2>A propos de l'application</h2>
+                            <p>A propos de l'application</p></a>
+                        </li>
+                    </ul>
+                </div><!-- /content -->
+            </div><!-- /page Menu-->
+            
+            
+            <!-- page Taux d'alcoolemie-->
+            <div data-role="page" id="page_taux_dalcoolemie" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content" >
+                    <h4 style="text-align:center;">Simulateur de taux d'alcoolémie</h4>
+                    <h5 style="text-align:center;">Doses de bar - Attention le temps d'élimination est une approximation, il dépend en effet de votre état de santé</h5>
+                    
+                    <p>Vous êtes :</p>
+                    <!--
+<select id="genreSimuTA">
+<option value="F">Une femme</option>
+<option value="H">Un homme</option>
+</select>
+-->
+                    <!--
+<a href="#MenuPS2" class="ui-btn" id="genreSimuTAF">Les Gestes qui sauvent</a>
+-->
+                    
+                    
+                    <!--Boutons Homme/Femme-->
+                    
+                    <form name="formHF">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="btnRadio" value="F" id="radio-choice-h-2a" checked="checked"> 
+                            <label for="radio-choice-h-2a">
+                                <img src="img/WomenLogo.png" width=50 height=50></label>
+                            <input type="radio" name="btnRadio" value="H" id="radio-choice-h-2b"> 
+                            <label for="radio-choice-h-2b">
+                                <img src="img/manLogo.png" width=50 height=50>
+                            </label>
+                        </fieldset>
+                    </form> 
+                    
+                    
+                    
+                    
+                    <p>Votre poids :</p>
+                    <input type="text" id="poids" pattern="[0-9]*" required/>
+                    
+                    <p>Nombre de verres : </p>
+                    <input type="text" id="nbVerres" pattern="[0-9]*" required/>
+                    
+                    <p>de...</p>
+                    
+                    <select id="boisson">
+                        <option value="biere">Bière</option>
+                        <option value="champagne">Champagne</option>
+                        <option value="cidre">Cidre</option>
+                        <option value="digestif">Digestif</option>
+                        <option value="pastis">Pastis</option>
+                        <option value="porto">Porto</option>
+                        <option value="rhum">Rhum</option>
+                        <option value="vin">Vin</option>
+                        <option value="vodka">Vodka</option>
+                        <option value="whisky">Whisky</option>
+                        <option value="autre">Autre...</option>
+                    </select>
+                    
+                    <!--Faire autocompletion des alcool pr aller plus vite-->
+                    <!--Rajouter des alcools Vodka, etc-->
+                    <!--Pouvoir ajouter differents verres-->
+                    <a href="#popupgraphe" data-rel="popup" data-position-to="window" data-transition="pop" ><button onClick="simuTauxAlcool();">Calculer</button></a>
+                    <button onClick="baseBoissons();">TestBDD</button>
+                    <a href="Alcools.html"> Choisir ses verres </a>
+                    
+                    <div id="dialogAutreB">Définir la boisson :</div>
+                    <!--
+<p id="test">C'est quoi </p>
+-->
+                    <p id="reponse"></p>
+                    <div data-role="popup" id="popupgraphe" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+                        <div role="main" class="ui-content">
+                            <div id="graphAlcool" style="min-width: 95%; height: 300px; margin: 0 auto"></div>
+                            <div id="graphAlcool2" style="min-width: 95%; height: 300px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div><!-- /content -->
+                
+            </div><!-- /page  Taux d'alcoolemie-->
+            
+            
+            
+            <!-- page distance de freinage-->
+            <div data-role="page" id="page_distance_de_freinage" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content" style="text-align:center;">
+                    <h5 style="text-align:center;">Simulateur de distance de reaction/freinage/arret - Les calculs dependent de votre degré de fatigue et/ou alcool</h5>
+                    
+                    <p> Vitesse en km/h </p><!--
+<input id="vitesseSimuArret" type="text" pattern="[0-9]*" required/>
+-->
+                    <label for="slider-fill-mini">Votre vitesse :</label>
+                    <input name="slider-fill-mini" id="vitesseSimuArret" value="40" min="0" max="180" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d" type="range">
+                    
+                    <p>Vous êtes :</p>
+                    <select id="etatSimuDA">
+                        <option value="N">Attentif</option>
+                        <option value="F">Fatigué</option>
+                        <option value="A">Alcoolisé</option>
+                    </select>
+                    
+                    <p>Etat de la chaussée :</p>
+                    <select id="chausseSimuDA">
+                        <option value="S">Sèche</option>
+                        <option value="M">Mouillée</option>
+                    </select>
+                    
+                    <!--Boutons Etat de la chaussée-->
+                    <form name="formWeather">
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="radio" name="btnRadio" value="S" id="radio-choice-h-2a" checked="checked"> 
+                            <label for="radio-choice-h-2a">
+                                <img src="img/CloudSun.png" width=50 height=50></label>
+                            <input type="radio" name="btnRadio" value="M" id="radio-choice-h-2b"> 
+                            <label for="radio-choice-h-2b">
+                                <img src="img/rain.png" width=50 height=50>
+                            </label>
+                        </fieldset>
+                    </form> 
+                    
+                    <!--Distance de réaction-->
+                    <p id="distReaction"></p>
+                    
+                    <!--Distance de freinage-->
+                    <p id="distFreinage"></p>
+                    
+                    <!--Distance d'arret-->
+                    <p id="distArret"></p>
+                    
+                    <button onClick="setTimeout(function(){simuDistanceArret();}, 100)">Calculer</button><!--Lance la fonction apres min 1 seconde-->
+                    
+                    <div id="graphSimuArret" style="min-width: 180px; height: 200px; margin: 0 auto"></div>
+                    
+                </div><!-- /content -->
+            </div><!-- /page distance de freinage-->
+            
+            
+            
+            
+            <!-- page Comparateur de vitesse-->
+            <div data-role="page" id="page_temps_perdue" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content" style="text-align:center;">
+                    <h5 style="text-align:center;">Simulateur de vitesse et gain de temps</h5>
+                    
+                    <p>Votre distance de parcours en km:</p>
+                    <input id="distanceSimuGtps" type="text" pattern="[0-9]*" required/>
+                    
+                    <p>Vitesse actuelle:</p>
+                    <input id="vitesseActuelleSimuGtps" type="text" pattern="[0-9]*" required/>
+                    
+                    <p>Vitesse autorisée :</p>
+                    <input id="vitesseAutoriseeSimuGtps" type="text" pattern="[0-9]*" required/>
+                    
+                    <button onClick="simuDistanceGtps();">Calculer</button>
+                    
+                    <p id="gainTps"></p>
+                </div><!-- /content -->
+            </div><!-- /page Comparateur de vitesses //Comparateur de vitesse-->
+            
+            <!-- page sécurité routière-->
+            <div data-role="page" id="page_secu_routiere" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                    <div data-role="navbar" class="ui-navbar" role="navigation">
+                        <ul class="ui-grid-a">
+                            <li class="ui-block-a"><a href="#" class="ui-btn-active ui-state-persist ui-link ui-btn">Sécurité routière</a></li>
+                            <li class="ui-block-b"><a href="#page_premier_secours" data-transition="fade" class=" ui-link ui-btn">Premiers secours</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /header -->
+            </div><!-- /page sécurité routière-->
+            
+            <!-- page premier secours-->
+            <div data-role="page" id="page_premier_secours" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                    <div data-role="navbar" class="ui-navbar" role="navigation">
+                        <ul class="ui-grid-a">
+                            <li class="ui-block-a"><a href="#page_secu_routiere" data-transition="fade" class=" ui-link ui-btn">Sécurité routière</a></li>
+                            <li class="ui-block-b"><a href="#" class="ui-btn-active ui-state-persist ui-link ui-btn">Premiers secours</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /header -->
+                
+                
+                <!-- content -->
+                <div class="content" data-role="content">
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">Les 4 étapes pour porter secours</a>
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">L'étouffement</a>    
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">L'inconscience</a>      
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">Le saignement</a>
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">Le malaise cardiaque</a>
+                    <a href="#secour" class="ui-btn" id="buttonMenu" data-transition="pop">L'arrêt cardiaque'</a>     
+                </div><!-- /content -->
+            </div><!-- /page premier secours-->
+            
+            <!--Sous Menu des gestes de secours - Les Gestes qui sauvent-->
+            <div data-role="page" id="MenuPS2" class="page_pan ui-page-header-fixed ui-page-theme-b">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">AppSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                    <div data-role="navbar" class="ui-navbar" role="navigation">
+                        <ul class="ui-grid-a">
+                            <li class="ui-block-a"><a href="#page_secu_routiere" data-transition="fade" class=" ui-link ui-btn">Sécurité routière</a></li>
+                            <li class="ui-block-b"><a href="#" class="ui-btn-active ui-state-persist ui-link ui-btn">Premiers secours</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Menu Premiers Secours - Niveau 2-->
+                
+                <!-- content -->
+                <div class="content" data-role="content" style="text-align:center;">
+                </div><!-- /content -->
+            </div><!-- /Menu gestes PS-->
+            
+            
+            <!-- page Numéro Urgence-->
+            <div data-role="page" id="page_numero_urgence"class="page_nue ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content" style="text-align:center;">
+                    <div>
+                        <a href="#popupDialogPompier" data-rel="popup" data-position-to="window" data-transition="pop" ><img class="appel" alt="appel pompier" src="img/appel_pompier.png"></a>
+                        <a href="#popupDialogSamu" data-rel="popup" data-position-to="window" data-transition="pop" ><img class="appel" alt="appel samu" src="img/appel_samu.png"></a>
+                    </div>
+                    <div>
+                        <a href="#popupDialogTaxis" data-rel="popup" data-position-to="window" data-transition="pop" ><img class="appel" alt="appel taxis" src="img/appel_taxis.png"></a>
+                        <a href="#popupDialogPolice" data-rel="popup" data-position-to="window" data-transition="pop" ><img class="appel" alt="appel police" src="img/appel_police.png"></a>
+                    </div> 
+                </div><!-- /content -->
+                
+                <div data-role="popup" id="popupDialogPompier" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <div data-role="header" data-theme="a">
+                        <h2>POMPIER</h2>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h4 class="ui-title">Étes vous sur de vouloir appeler les pompiers ?</h4>
+                        <p>Cette action ne peut pas être annulée</p>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Quitter</a>
+                        <a href="tel:18" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Appeler</a>
+                    </div>
+                </div>
+                <div data-role="popup" id="popupDialogSamu" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <div data-role="header" data-theme="a">
+                        <h2>SAMU</h2>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h4 class="ui-title">Étes vous sur de vouloir appeler le samu ?</h4>
+                        <p>Cette action ne peut pas être annulée</p>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Quitter</a>
+                        <a href="tel:15" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Appeler</a>
+                    </div>
+                </div>
+                <div data-role="popup" id="popupDialogTaxis" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <div data-role="header" data-theme="a">
+                        <h2>TAXIS</h2>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h4 class="ui-title">Étes vous sur de vouloir appeler un taxis ?</h4>
+                        <p>Cette action ne peut pas être annulée</p>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Quitter</a>
+                        <a href="tel:112" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Appeler</a>
+                    </div>
+                </div>
+                <div data-role="popup" id="popupDialogPolice" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <div data-role="header" data-theme="a">
+                        <h2>POLICE</h2>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h4 class="ui-title">Étes vous sur de vouloir appeler la police ?</h4>
+                        <p>Cette action ne peut pas être annulée</p>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Quitter</a>
+                        <a href="tel:17" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Appeler</a>
+                    </div>
+                </div><!-- /content -->
+            </div><!-- /page Numéro Urgence-->   
+            
+            <!-- page links-->
+            <div data-role="page" id="page_links" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content">    
+                    <ul data-role="listview" class="no-radius" data-inset="true">
+                        <li data-role="list-divider" class="list-divider">Informations</li>
+                        <li><a href="http://securite-routiere.gouv.fr">
+                            <img class="icon-menu" src="img/icons/creek.png">
+                            <h2>Sécurité Routière</h2>
+                            <p>Site national de la sécurité routière</p></a>
+                        </li>
+                        <li><a href="http://www.drogues.gouv.fr">
+                            <img class="icon-menu" src="img/icons/no_smoking.png">
+                            <h2>Drogue info service</h2>
+                            <p>Site Officiel de drogue info service</p></a>
+                        </li>
+                        <li><a href="http://www.alcool-info-service.fr">
+                            <img class="icon-menu" src="img/icons/coctail.png">
+                            <h2>Alcool info service</h2>
+                            <p>Site Officiel de alcool info service</p></a>
+                        </li>
+                        <li><a href="http://www.sante.gouv.fr">
+                            <img class="icon-menu" src="img/icons/doctor_suitecase.png">
+                            <h2>Santé</h2>
+                            <p>Site gouvernemental de la santé</p></a>
+                        </li>
+                        <li data-role="list-divider" class="list-divider">Premiers secours</li>
+                        <li><a href="http://www.hopital.fr/Hopitaux/Vos-dossiers-sante/Gestes-de-premier-secours">
+                            <img class="icon-menu" src="img/icons/clinic.png">
+                            <h2>Hopital.fr</h2>
+                            <p>Gestes de premiers secour</p></a>
+                        </li>
+                        <li><a href="http://www.croix-rouge.fr/Je-me-forme/Particuliers/Les-6-gestes-de-base">
+                            <img class="icon-menu" src="img/icons/plus.png">
+                            <h2>Croix Rouge</h2>
+                            <p>Les 6 gestes de base</p></a>
+                        </li>
+                        <li data-role="list-divider" class="list-divider">Conditions de circulation</li>
+                        <li><a href="http://www.msr-cotesdarmor.com/">
+                            <img class="icon-menu" src="img/icons/road_worker.png">
+                            <h2>Maison Virtuel de La Sécurité Routière</h2>
+                            <p>Site des Côtes d'Armor</p></a>
+                        </li>
+                        <li><a href="http://www.bison-fute.gouv.fr/">
+                            <img class="icon-menu" src="img/icons/map.png">
+                            <h2>Bison futé</h2>
+                            <p>Site gouvernemental bison futé</p></a>
+                        </li>
+                    </ul>
+                </div><!-- /content -->
+            </div><!-- /page links-->
+            
+            <!-- page about-->
+            <div data-role="page" id="page_about" class="page_pan ui-page-header-fixed ui-page-theme-a">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">APPSR</h1>
+                    <a href="#menu" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                </div>
+                <!-- /header -->
+                
+                <!-- content -->
+                <div class="content" data-role="content" style="text-align:center;">
+                    <img alt="logo sécurité routière" src="img/logo.jpg" width="40%" height="35%" style="margin-top: 4%;"/>
+                    <p><br /><br />Application réalisée et développée en partenariat entre la préfecture des Côtes d’Armor et 
+l’IUT de Lannion. </p><p>Pilotage du projet : <br/>Frédéric Maignan </p><p>Développement : <br/>Cécilia Le Calvez - Quentin De Quelen</p>
+
+                </div><!-- /content -->
+            </div><!-- /page about-->
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div data-role="page" id="secour" class="demo-page" data-title="Automobiliste" data-dom-cache="true" data-theme="a" data-prev="Piqures" data-next="Piqures">
+                <!-- header -->
+                <div data-role="header"  data-position="fixed" role="banner" class="ui-header ui-bar-inherit">
+                    <h1 class="ui-title" role="heading" aria-level="1">AppSR</h1>
+                    <a href="#page_premier_secours" data-direction="reverse" data-transition="slide" data-back="true" class="ui-icon-back ui-btn ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Return</a>
+                    <div data-role="navbar" class="ui-navbar" role="navigation">
+                        <ul class="ui-grid-a">
+                            <li class="ui-block-a"><a href="#page_secu_routiere" data-transition="fade" class=" ui-link ui-btn">Sécurité routière</a></li>
+                            <li class="ui-block-b"><a href="#page_premier_secours" data-transition="fade" class="ui-btn-active ui-state-persist ui-link ui-btn">Premiers secours</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>Cette page est en cours de réalisation</h2>
+            </div><!-- /page -->
+        </span> <!-- end fastclick -->
+    </body>
+</html>
